@@ -3,6 +3,7 @@ const router = express.Router();
 const UserAlert = require('../models/UserAlert');
 // Add at top
 const sendAlertEmail = require('../utils/mailer');
+const sendAlertSMS = require('../utils/sms');
 const User = require('../models/User');
 const {
   getUserAlerts,
@@ -21,8 +22,9 @@ router.post('/', authenticate, async (req, res) => {
     // Fetch all responders
     const responders = await User.find({ role: 'responder' });
     const emails = responders.map(r => r.email);
+    const phoneNumbers = responders.map(r => r.phone); // Ensure `phone` is stored in User model
 
-    // Send alert email
+    // Email content
     const subject = '🚨 New User Alert Created';
     const html = `
       <h3>New User Alert Details</h3>
@@ -31,9 +33,15 @@ router.post('/', authenticate, async (req, res) => {
       <p><strong>Severity:</strong> ${alert.severity}</p>
       <p><strong>Description:</strong> ${alert.description || 'N/A'}</p>
     `;
-    await sendAlertEmail(emails, subject, html);
 
-    res.status(201).json({ message: 'User alert created and responders notified' });
+    // SMS content
+    const smsMessage = `🚨 New Alert: ${alert.incident}\n⚠️ Severity: ${alert.severity}`;
+
+    // Send notifications
+    await sendAlertEmail(emails, subject, html);
+    await sendAlertSMS(phoneNumbers, smsMessage);
+
+    res.status(201).json({ message: 'User alert created, responders notified via Email & SMS' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to create user alert' });
@@ -97,15 +105,15 @@ router.delete('/:id', authenticate, async (req, res) => {
   }
 });
 
-
-
 // ✅ New: Responder marks themselves as available for user alert
 router.post('/respond/:id', authenticate, respondToUserAlert);
 
 // ✅ New: Admin assigns responder to user alert
 router.post('/assign/:id', authenticate, assignUserToUserAlert);
 
+// ✅ Update progress
 router.put('/:id/progress', updateProgressStatus);
+
 // ✅ Get progress of a specific alert
 router.get('/:id/progress', authenticate, async (req, res) => {
   try {
@@ -113,7 +121,6 @@ router.get('/:id/progress', authenticate, async (req, res) => {
     if (!alert) {
       return res.status(404).json({ message: 'Alert not found' });
     }
-
     return res.json({ progressStatus: alert.progressStatus });
   } catch (err) {
     console.error('Error fetching progress:', err);

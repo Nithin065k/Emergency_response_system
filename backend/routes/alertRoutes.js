@@ -25,7 +25,7 @@ router.post("/", authenticate, async (req, res) => {
       <p><strong>Incident:</strong> ${newAlert.incident}</p>
       <p><strong>Location:</strong> ${newAlert.place}</p>
       <p><strong>Severity:</strong> ${newAlert.severity}</p>
-      <p><strong>Description:</strong> ${newAlert.description || "N/A"}</p>
+      <p><strong>Description:</strong> ${newAlert.additionalDetails || "N/A"}</p>
     `
      await sendAlertEmail(emails, subject, html);
 
