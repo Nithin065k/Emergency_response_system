@@ -11,7 +11,7 @@ import { Input } from "../components/ui/Input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
 import { toast } from "react-toastify"
 
-const SITE_KEY = "6LcRaG4sAAAAAJVIli1bCcjbRsE7TNwTL2rKDUt0"
+const SITE_KEY = "6LcNbW4sAAAAACza73d6iiQ7boaMWBG_dQAKaotO"
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: "", password: "" })
