@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://emergency-response-system-cbr2.onrender.com');
 
 const ChatBox = ({ alertId, currentUser }) => {
   const [messages, setMessages] = useState([]);
@@ -16,7 +16,7 @@ const ChatBox = ({ alertId, currentUser }) => {
     // Fetch previous messages
     const fetchMessages = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/chat/${alertId}`);
+        const res = await fetch(`https://emergency-response-system-cbr2.onrender.com/api/chat/${alertId}`);
         const data = await res.json();
         const formatted = data.map((msg) => ({
           sender: msg.sender.name,
