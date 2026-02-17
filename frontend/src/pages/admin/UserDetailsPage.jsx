@@ -43,8 +43,8 @@ const UserDetailsPage = () => {
     try {
       setLoading(true)
       const [eventRes, donationRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/events"),
-        axios.get("http://localhost:5000/api/donations"),
+        axios.get("https://emergency-response-system-cbr2.onrender.com/api/events"),
+        axios.get("https://emergency-response-system-cbr2.onrender.com/api/donations"),
       ])
       setEvents(eventRes.data || [])
       setDonations(donationRes.data || [])
@@ -68,7 +68,7 @@ const UserDetailsPage = () => {
     if (poster) formData.append("poster", poster)
 
     try {
-      await axios.post("http://localhost:5000/api/events", formData)
+      await axios.post("https://emergency-response-system-cbr2.onrender.com/api/events", formData)
       toast.success("Event added successfully!")
       setForm({ name: "", place: "", date: "" })
       setPoster(null)
@@ -85,7 +85,7 @@ const UserDetailsPage = () => {
     if (!window.confirm("Are you sure you want to delete this event?")) return
 
     try {
-      await axios.delete(`http://localhost:5000/api/events/${id}`)
+      await axios.delete(`https://emergency-response-system-cbr2.onrender.com/api/events/${id}`)
       toast.success("Event deleted successfully")
       fetchData()
     } catch (error) {

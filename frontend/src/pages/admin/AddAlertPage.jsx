@@ -281,7 +281,7 @@ const AddAlertPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/alerts", {
+      const res = await axios.get("https://emergency-response-system-cbr2.onrender.com/api/alerts", {
         headers: { Authorization: `Bearer ${token}` },
         params: { severity: filterSeverity, search, page, limit: 4 },
       });
@@ -306,7 +306,7 @@ const AddAlertPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/user-alerts", {
+      const res = await axios.get("https://emergency-response-system-cbr2.onrender.com/api/user-alerts", {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(res.data)
@@ -357,7 +357,7 @@ const AddAlertPage = () => {
     try {
       if (editingAlertId) {
         await axios.put(
-          `http://localhost:5000/api/alerts/${editingAlertId}`,
+          `https://emergency-response-system-cbr2.onrender.com/api/alerts/${editingAlertId}`,
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -366,7 +366,7 @@ const AddAlertPage = () => {
         toast.success("Alert updated successfully");
         setEditingAlertId(null);
       } else {
-        await axios.post("http://localhost:5000/api/alerts", payload, {
+        await axios.post("https://emergency-response-system-cbr2.onrender.com/api/alerts", payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Alert added successfully");
@@ -416,7 +416,7 @@ const AddAlertPage = () => {
     if (!window.confirm("Are you sure you want to delete this alert?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/alerts/${id}`, {
+      await axios.delete(`https://emergency-response-system-cbr2.onrender.com/api/alerts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Alert deleted");
@@ -431,11 +431,11 @@ const AddAlertPage = () => {
     try {
       const token = localStorage.getItem("token");
       const endpoint = alertId.startsWith("user")
-        ? `http://localhost:5000/api/user-alerts/assign/${alertId.replace(
+        ? `https://emergency-response-system-cbr2.onrender.com/api/user-alerts/assign/${alertId.replace(
             "user_",
             ""
           )}`
-        : `http://localhost:5000/api/alerts/assign/${alertId}`;
+        : `https://emergency-response-system-cbr2.onrender.com/api/alerts/assign/${alertId}`;
 
       await axios.post(
         endpoint,

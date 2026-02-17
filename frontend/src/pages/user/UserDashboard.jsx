@@ -84,7 +84,7 @@ const UserDashboard = () => {
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
   const token = localStorage.getItem("token");
-  const BASE_URL = "http://localhost:5000/api";
+  const BASE_URL = "https://emergency-response-system-cbr2.onrender.com/api";
 
   // Fetch suggestions with useCallback
   const fetchSuggestions = useCallback(async (query) => {

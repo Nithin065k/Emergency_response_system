@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000'); // Or your backend server URL
+const socket = io('https://emergency-response-system-cbr2.onrender.com'); // Or your backend server URL
 
 export const useSocket = () => {
   const [alert, setAlert] = useState(null);

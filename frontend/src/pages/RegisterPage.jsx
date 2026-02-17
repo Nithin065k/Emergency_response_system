@@ -107,7 +107,7 @@ const RegisterPage = () => {
 
     setLoading(true)
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", formData)
+      const response = await axios.post("https://emergency-response-system-cbr2.onrender.com/api/auth/register", formData)
       const { requiresApproval: needsApproval } = response.data
 
       setRegistrationComplete(true)

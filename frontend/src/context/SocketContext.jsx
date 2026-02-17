@@ -8,7 +8,7 @@ export const SocketProvider = ({ children }) => {
   const [alert, setAlert] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:5000');
+    const newSocket = io('https://emergency-response-system-cbr2.onrender.com');
     setSocket(newSocket);
 
     newSocket.on('receiveAlert', (data) => {

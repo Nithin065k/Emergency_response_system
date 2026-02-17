@@ -24,10 +24,10 @@ const ResponderDetailsPage = () => {
     const fetchData = async () => {
       try {
         const [respondersRes, usersRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/users/responders", {
+          axios.get("https://emergency-response-system-cbr2.onrender.com/api/users/responders", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get("http://localhost:5000/api/users/users", {
+          axios.get("https://emergency-response-system-cbr2.onrender.com/api/users/users", {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ])
@@ -50,7 +50,7 @@ const ResponderDetailsPage = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/auth/responder-approval/${userId}`,
+        `https://emergency-response-system-cbr2.onrender.com/api/auth/responder-approval/${userId}`,
         { isApproved: !currentApprovalStatus },
         { headers: { Authorization: `Bearer ${token}` } },
       )

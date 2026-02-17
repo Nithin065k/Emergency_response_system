@@ -40,7 +40,7 @@ const ResponderAlertsPage = () => {
   const fetchCurrentUser = async () => {
     try {
       const token = localStorage.getItem("token")
-      const res = await axios.get("http://localhost:5000/api/auth/me", {
+      const res = await axios.get("https://emergency-response-system-cbr2.onrender.com/api/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       })
       setCurrentUserId(res.data._id)
@@ -53,7 +53,7 @@ const ResponderAlertsPage = () => {
   const fetchAdminAlerts = async () => {
     try {
       const token = localStorage.getItem("token")
-      const res = await axios.get("http://localhost:5000/api/alerts", {
+      const res = await axios.get("https://emergency-response-system-cbr2.onrender.com/api/alerts", {
         headers: { Authorization: `Bearer ${token}` },
       })
       const data = Array.isArray(res.data) ? res.data : res.data.alerts
@@ -67,7 +67,7 @@ const ResponderAlertsPage = () => {
   const fetchUserAlerts = async () => {
     try {
       const token = localStorage.getItem("token")
-      const res = await axios.get("http://localhost:5000/api/user-alerts", {
+      const res = await axios.get("https://emergency-response-system-cbr2.onrender.com/api/user-alerts", {
         headers: { Authorization: `Bearer ${token}` },
       })
       const data = Array.isArray(res.data) ? res.data : res.data.alerts
@@ -169,8 +169,8 @@ const ResponderAlertsPage = () => {
       const token = localStorage.getItem("token")
       const url =
         type === "admin"
-          ? `http://localhost:5000/api/alerts/respond/${alertId}`
-          : `http://localhost:5000/api/user-alerts/respond/${alertId}`
+          ? `https://emergency-response-system-cbr2.onrender.com/api/alerts/respond/${alertId}`
+          : `https://emergency-response-system-cbr2.onrender.com/api/user-alerts/respond/${alertId}`
 
       await axios.post(
         url,
@@ -219,7 +219,7 @@ const ResponderAlertsPage = () => {
 
   const handleProgressChange = async (alertId, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/user-alerts/${alertId}/progress`, {
+      await axios.put(`https://emergency-response-system-cbr2.onrender.com/api/user-alerts/${alertId}/progress`, {
         progressStatus: newStatus,
       })
 

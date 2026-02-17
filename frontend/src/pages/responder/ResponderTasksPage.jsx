@@ -23,7 +23,7 @@ const ResponderTasksPage = () => {
     const fetchEvents = async () => {
       try {
         setLoading(true)
-        const res = await axios.get("http://localhost:5000/api/events")
+        const res = await axios.get("https://emergency-response-system-cbr2.onrender.com/api/events")
         setEvents(res.data || [])
         setFilteredEvents(res.data || [])
       } catch (error) {
@@ -66,7 +66,7 @@ const ResponderTasksPage = () => {
 
   const handleShare = async (event) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${event._id}/poster`)
+      const response = await fetch(`https://emergency-response-system-cbr2.onrender.com/api/events/${event._id}/poster`)
       const blob = await response.blob()
       const file = new File([blob], `${event.name}.jpg`, { type: blob.type })
 
@@ -79,7 +79,7 @@ const ResponderTasksPage = () => {
         toast.success("Event shared successfully!")
       } else {
         // Fallback: copy to clipboard or show share options
-        const url = `http://localhost:5000/api/events/${event._id}/poster`
+        const url = `https://emergency-response-system-cbr2.onrender.com/api/events/${event._id}/poster`
         await navigator.clipboard.writeText(
           `Check out this training event: ${event.name} at ${event.place} on ${new Date(
             event.date,
@@ -96,7 +96,7 @@ const ResponderTasksPage = () => {
   const handleDownload = (event) => {
     try {
       const link = document.createElement("a")
-      link.href = `http://localhost:5000/api/events/${event._id}/poster`
+      link.href = `https://emergency-response-system-cbr2.onrender.com/api/events/${event._id}/poster`
       link.download = `${event.name.replace(/\s+/g, "-")}-poster.jpg`
       document.body.appendChild(link)
       link.click()
