@@ -426,8 +426,8 @@ const ResponderAlertsPage = () => {
     try {
       const token = localStorage.getItem("token")
       const endpoint = alertId.startsWith("user")
-        ? `http://localhost:5000/api/user-alerts/assign/${alertId.replace("user_", "")}`
-        : `http://localhost:5000/api/alerts/assign/${alertId}`
+        ? `https://emergency-response-system-cbr2.onrender.com/api/user-alerts/assign/${alertId.replace("user_", "")}`
+        : `https://emergency-response-system-cbr2.onrender.com/api/alerts/assign/${alertId}`
 
       await axios.post(endpoint, { responderId }, { headers: { Authorization: `Bearer ${token}` } })
 

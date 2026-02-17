@@ -349,7 +349,7 @@ const UserDetailsPage = () => {
               <Card key={event._id} className="hover:shadow-lg transition-shadow duration-200">
                 <div className="relative">
                   <img
-                    src={`http://localhost:5000/api/events/${event._id}/poster`}
+                    src={`https://emergency-response-system-cbr2.onrender.com/api/events/${event._id}/poster`}
                     alt={event.name}
                     className="w-full h-48 object-cover rounded-t-lg"
                     onError={(e) => {

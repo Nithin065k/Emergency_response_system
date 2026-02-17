@@ -59,7 +59,7 @@ const RegisterPage = () => {
 
     setLoading(true)
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/send-otp", { email, name })
+      const res = await axios.post("https://emergency-response-system-cbr2.onrender.com/api/auth/send-otp", { email, name })
       if (res.data.success) {
         setOtpSent(true)
         setError("")
@@ -81,7 +81,7 @@ const RegisterPage = () => {
 
     setLoading(true)
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+      const res = await axios.post("https://emergency-response-system-cbr2.onrender.com/api/auth/verify-otp", {
         email: formData.email,
         otp,
       })
