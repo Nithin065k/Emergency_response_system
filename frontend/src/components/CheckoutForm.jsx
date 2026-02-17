@@ -36,7 +36,7 @@ const CheckoutForm = ({ onSuccess, redirectTo }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/create-payment-intent", {
+      const res = await fetch("http://emergency-response-system-cbr2.onrender.com/api/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, name, email }),
