@@ -116,9 +116,28 @@ router.post("/verify-otp", async (req, res) => {
     return res.status(400).json({ verified: false, message: "Invalid OTP" })
   }
 })
-router.get("/test-email", (req, res) => {
-  console.log("Test route hit");
-  res.send("Auth route is working");
+router.get("/test-email", async (req, res) => {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.ALERT_EMAIL,
+      pass: process.env.ALERT_EMAIL_PASSWORD,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+  });
+
+  try {
+    await transporter.verify();
+    console.log("SMTP connection successful");
+    res.send("SMTP connection successful");
+  } catch (error) {
+    console.log("SMTP ERROR:", error);
+    res.status(500).send(error.message);
+  }
 });
 
 module.exports = router
